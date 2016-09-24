@@ -1,16 +1,3 @@
-module.exports = {
-  login( req, res ) {
-      for ( let i = 0; i < users.length; i++ ) {
-          if ( users[ i ].name === req.body.name && users[ i ].password === req.body.password ) {
-              req.session.currentUser = users[ i ];
-              console.log( 'this is req.session.currentUser from server userCtrl', req.session.currentUser );
-              return res.send( { userFound: true } );
-          }
-      }
-      return res.send( { userFound: false } )
-  }
-};
-
 const users = [
   {
     name: 'Preston McNeil',
@@ -33,3 +20,27 @@ const users = [
     friends: ['Preston McNeil', 'Ryan Rasmussen', 'Terri Ruff']
   }
 ];
+
+
+module.exports = {
+  login( req, res ) {
+      for ( let i = 0; i < users.length; i++ ) {
+          if ( users[ i ].name === req.body.name && users[ i ].password === req.body.password ) {
+              req.session.currentUser = users[ i ];
+              return res.send( { userFound: true } );
+          }
+      }
+      return res.send( { userFound: false } );
+  }
+  , updateUser( req, res, next ) {
+      if ( req.body.name ) {
+        req.session.currentUser.name = req.body.name;
+      }
+      if ( req.body.password ) {
+        req.session.currentUser.password = req.body.password;
+      }
+      return res.status( 200 ).json( req.session.currentUser );
+  }
+  , users: users
+
+};

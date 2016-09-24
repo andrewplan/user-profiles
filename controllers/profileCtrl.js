@@ -15,6 +15,24 @@ module.exports = {
             , friends: currentUserFriends
         } );
     }
+
+    , addFriend( req, res ) {
+
+    }
+
+    , removeFriend( req, res, next ) {
+          for ( let i = req.session.currentUser.friends.length - 1; i >= 0; i-- ) {
+              if ( req.session.currentUser.friends[ i ] === req.body.name ) {
+                  req.session.currentUser.friends.splice( i, 1 );
+                  userCtrl.users[ i ].friends.splice( i, 1 );
+              }
+          }
+          console.log( req.session.currentUser.friends );
+          // return res.status( 200 ).json( req.session.currentUser.friends );
+          next();
+    }
+
+
 };
 
 const profiles = [

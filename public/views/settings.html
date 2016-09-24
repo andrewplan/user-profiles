@@ -1,0 +1,17 @@
+<div class="wrapper">
+  <div>
+    <img src="/images/people.jpg" alt="photo montage">
+  </div>
+
+  <div class="login">
+    <h2>Settings</h2>
+    <input id="name" type="text" ng-model="user.name" placeholder="User Name">
+    <br />
+    <input id="password" type="password" ng-model="user.password" placeholder="Password">
+    <button ng-click="updateUser( user )">Update user</button>
+    <br />
+
+<!--   need a button instead?-->
+<!--    <a ui-sref="profile" ng-click="login(user.userName, user.password)">Login</a>-->
+  </div>
+</div>
